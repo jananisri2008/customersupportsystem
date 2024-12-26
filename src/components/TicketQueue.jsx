@@ -1,8 +1,13 @@
 import React from "react";
 import Ticket from "./Ticket";
 
-function TicketQueue({ tickets, removeTicket, reorderTickets }) {
+function TicketQueue({ tickets, removeTicket, reorderTickets,markResolved }) {
     const handleDragEnd = (e) => {
+        e.preventDefault();
+
+        const data=e.dataTransfer.getData("text");
+        if(!data) return;
+
         const { sourceIndex, destinationIndex } = JSON.parse(e.dataTransfer.getData("text"));
         if (sourceIndex !== undefined && destinationIndex !== undefined) {
             reorderTickets(sourceIndex, destinationIndex);
@@ -21,6 +26,7 @@ function TicketQueue({ tickets, removeTicket, reorderTickets }) {
                     ticket={ticket}
                     index={index}
                     removeTicket={removeTicket}
+                    markResolved={markResolved}
                 />
             ))}
         </div>

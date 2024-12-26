@@ -1,6 +1,6 @@
 import React from "react";
 
-function Ticket({ ticket, index, removeTicket }) {
+function Ticket({ ticket, index, removeTicket, markResolved }) {
     const handleDragStart = (e) => {
         e.dataTransfer.setData(
             "text",
@@ -13,6 +13,11 @@ function Ticket({ ticket, index, removeTicket }) {
             "text",
             JSON.stringify({ destinationIndex: index })
         );
+    };
+
+    const formatDate=(timestamp)=>{
+        const date=new Date(timestamp);
+        return date.toLocaleString();
     };
 
     return (
@@ -29,7 +34,13 @@ function Ticket({ ticket, index, removeTicket }) {
             <div>
                 <strong>Issue:</strong> {ticket.issue}
             </div>
-            <button onClick={() => removeTicket(ticket.id)}>Resolve</button>
+            <div>
+                <strong>Time:</strong> {ticket.date ? formatDate(ticket.date) :"Not Available"}
+            </div>
+            <button onClick={()=>markResolved(ticket.id)}>
+                {ticket.resolved?"resolved ✔ ":"resolve"}
+            </button>
+            {/* <button onClick={() => removeTicket(ticket.id)}>Resolve</button> */}
         </div>
     );
 }

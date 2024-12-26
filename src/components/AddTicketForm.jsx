@@ -11,6 +11,7 @@ function AddTicketForm({ addTicket }) {
                 id: Date.now(),
                 customerName,
                 issue,
+                date:new Date().toLocaleString(),
             };
             addTicket(newTicket);
             setCustomerName("");

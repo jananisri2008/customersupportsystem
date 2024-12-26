@@ -20,14 +20,25 @@ function App() {
         setTickets(updatedTickets);
     };
 
+    const markResolved = (id) => {
+        setTickets((prevTickets) =>
+            prevTickets.map((ticket) =>
+                ticket.id === id ? { ...ticket, resolved: !ticket.resolved } : ticket
+            )
+        );
+    };
+
+    
     return (
         <div className="app-container">
             <h1>Customer Support Ticket System</h1>
-            <AddTicketForm addTicket={addTicket} />
+            <AddTicketForm addTicket={addTicket}/>
+            <br/>
             <TicketQueue
                 tickets={tickets}
                 removeTicket={removeTicket}
                 reorderTickets={reorderTickets}
+                markResolved={markResolved}
             />
         </div>
     );
