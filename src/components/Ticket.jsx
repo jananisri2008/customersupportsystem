@@ -45,11 +45,11 @@ function Ticket({ ticket, index, removeTicket, markResolved }) {
                 <strong>Time:</strong> {ticket.date ? formatDate(ticket.date) :"Not Available"}
             </div>
             
-            <button onClick={handleResolve} disabled={resolved}>
-                {resolved?"resolved ✔ ":"resolve"}
+            <button  className="resolve-btn" onClick={handleResolve} disabled={resolved}>
+                {resolved?"Resolved ✔ ":"Resolve"}
             </button>
             {resolved && (
-                 <button onClick={() => removeTicket(ticket.id)}>Remove</button>
+                 <button className="remove-btn" onClick={() => removeTicket(ticket.id)}>Remove</button>
             )}
             </div>
     );
