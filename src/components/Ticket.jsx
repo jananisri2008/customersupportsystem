@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Ticket({ ticket, index, removeTicket, markResolved }) {
+   const [resolved,setResolved]=useState(ticket.resolved);
+
     const handleDragStart = (e) => {
         e.dataTransfer.setData(
             "text",
@@ -9,10 +11,10 @@ function Ticket({ ticket, index, removeTicket, markResolved }) {
     };
 
     const handleDrop = (e) => {
-        e.dataTransfer.setData(
-            "text",
-            JSON.stringify({ destinationIndex: index })
-        );
+        // e.dataTransfer.setData(
+        //     "text",
+        //     JSON.stringify({ destinationIndex: index })
+        // );
     };
 
     const formatDate=(timestamp)=>{
@@ -31,7 +33,7 @@ function Ticket({ ticket, index, removeTicket, markResolved }) {
             draggable
             onDragStart={handleDragStart}
             onDragOver={(e) => e.preventDefault()}
-            onDrop={handleDrop}
+            // onDrop={handleDrop}
         >
             <div>
                 <strong>Customer:</strong> {ticket.customerName}
@@ -44,7 +46,7 @@ function Ticket({ ticket, index, removeTicket, markResolved }) {
             </div>
             
             <button onClick={handleResolve} disabled={resolved}>
-                {ticket.resolved?"resolved ✔ ":"resolve"}
+                {resolved?"resolved ✔ ":"resolve"}
             </button>
             {resolved && (
                  <button onClick={() => removeTicket(ticket.id)}>Remove</button>
