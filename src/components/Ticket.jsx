@@ -20,6 +20,11 @@ function Ticket({ ticket, index, removeTicket, markResolved }) {
         return date.toLocaleString();
     };
 
+    const handleResolve=()=>{
+        setResolved(true);
+        markResolved(ticket.id);
+    };
+
     return (
         <div
             className="ticket"
@@ -38,14 +43,13 @@ function Ticket({ ticket, index, removeTicket, markResolved }) {
                 <strong>Time:</strong> {ticket.date ? formatDate(ticket.date) :"Not Available"}
             </div>
             
-            <button onClick={()=>markResolved(ticket.id)}
-               disabled={ticket.resolved}
-            >
+            <button onClick={handleResolve} disabled={resolved}>
                 {ticket.resolved?"resolved ✔ ":"resolve"}
             </button>
-            
-            <button onClick={() => removeTicket(ticket.id)}>Remove</button>
-        </div>
+            {resolved && (
+                 <button onClick={() => removeTicket(ticket.id)}>Remove</button>
+            )}
+            </div>
     );
 }
 
