@@ -37,10 +37,14 @@ function Ticket({ ticket, index, removeTicket, markResolved }) {
             <div>
                 <strong>Time:</strong> {ticket.date ? formatDate(ticket.date) :"Not Available"}
             </div>
-            <button onClick={()=>markResolved(ticket.id)}>
+            
+            <button onClick={()=>markResolved(ticket.id)}
+               disabled={ticket.resolved}
+            >
                 {ticket.resolved?"resolved ✔ ":"resolve"}
             </button>
-            {/* <button onClick={() => removeTicket(ticket.id)}>Resolve</button> */}
+            
+            <button onClick={() => removeTicket(ticket.id)}>Remove</button>
         </div>
     );
 }
